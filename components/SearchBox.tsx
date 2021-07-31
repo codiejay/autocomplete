@@ -1,4 +1,4 @@
-import { Box, Flex, Input, Select, Spacer, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Input, Select, Spacer, Stack, Text, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 let countryList = [ 
   {name: 'Afghanistan', code: 'AF'}, 
@@ -249,23 +249,21 @@ let countryList = [
 
 export const SearchBox: React.FC = () => {
   const [searchWord, setSearchWord] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('');
   const SearchOptions = () => {
     return ( 
-      <Box bg='#2D3748'>
+      <Box>
         <Stack display={searchWord.length > 0 ? 'initial' : 'none'}>
           { 
             countryList.filter((item) => {return item.name.substring(0,searchWord.length).toLocaleLowerCase() === searchWord.toLocaleLowerCase()}).map((item, index) => {
               return ( 
-                <Text 
+                <Button
+                  onClick={(event) => {setSelectedCountry(item.name)}}
+                  variant='selectBttn'
                   key={index}
-                  bg='#4a5568'
-                  p='1rem 0.5rem'
-                  color='white'
-                  borderRadius='4px'
-                  cusor='pointer'
                 >
                   {item.name}
-                </Text>
+                </Button>
               )
             })
           }
@@ -276,7 +274,11 @@ export const SearchBox: React.FC = () => {
 
   return (
     <Flex direction='column' w='40%' maxW='400px'>
-      <Text fontSize='4rem'>🌍</Text>
+      <HStack alignItems='center'>
+      <Text fontSize='3rem'>🌍</Text>
+      <Text fontSize='2rem'>:{selectedCountry}</Text>
+
+      </HStack>
       <Input  
         color='white'
         m='1rem auto'
