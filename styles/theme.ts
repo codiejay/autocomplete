@@ -9,10 +9,33 @@ const config : ThemeConfig =  {
 import { mode, transparentize } from '@chakra-ui/theme-tools'
 type Dict = Record<string, any>
 
-function selectBttn(props: Dict) {
+function regular(props: Dict) {
   const { colorScheme: c } = props
   return {
+    mb:'1rem',
     bg: 'primary',
+    padding: '22px',
+    textAlign: 'left',
+    height: 'auto',
+    width: '100%',
+    lineHeight: 'normal',
+    color: 'white',
+    justifyContent: 'end',
+    _hover: {
+      bg: 'highlight'
+    },
+    _active: {
+      color: mode(`${c}.700`, `${c}.500`)(props),
+      outline: 'none'
+    },
+  }
+}
+
+function selectedBttn(props: Dict) {
+  const { colorScheme: c } = props
+  return {
+    mb:'1rem',
+    bg: 'secondary',
     padding: '22px',
     textAlign: 'left',
     height: 'auto',
@@ -24,7 +47,7 @@ function selectBttn(props: Dict) {
       bg: 'secondary'
     },
     _active: {
-      color: 'white',
+      color: mode(`${c}.700`, `${c}.500`)(props),
       outline: 'none'
     },
   }
@@ -32,16 +55,17 @@ function selectBttn(props: Dict) {
 
 export  const myNewTheme = extendTheme({
   colors: { 
-    primary: '#2d3748',
+    primary: '#475367',
     secondary: '#319795',
-    highlight: '#00C9A7',
+    highlight: '#1d2635',
     warning: '#FFC75F',
     danger: '#C34A36',
   },
   components: { 
     Button: {
       variants: {
-        selectBttn
+        regular,
+        selectedBttn
       }
     }
   },
