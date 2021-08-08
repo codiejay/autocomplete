@@ -68,7 +68,6 @@ export const SearchBox = ({data}: SearchBoxProps) => {
           })
         }
       </Box>
-      
     </Flex>
     
   )
